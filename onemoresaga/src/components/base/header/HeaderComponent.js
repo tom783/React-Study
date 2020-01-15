@@ -16,10 +16,9 @@ const Styled = {
   `
 };
 
-class HeaderContainer extends Component {
-  render() {
-    return (
-      <Styled.Navbar>
+const HeaderComponent = () => {
+  return (
+    <Styled.Navbar>
         <Styled.List>
           <Link to="/">Home</Link>
         </Styled.List>
@@ -33,8 +32,7 @@ class HeaderContainer extends Component {
           <Link to="/place">Place</Link>
         </Styled.List>
       </Styled.Navbar>
-    );
-  }
-}
+  );
+};
 
-export default HeaderContainer;
+export default HeaderComponent;

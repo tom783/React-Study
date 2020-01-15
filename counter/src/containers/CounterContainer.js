@@ -44,11 +44,13 @@ class CounterContainer extends Component {
   }
 }
 
+// 리덕스 연결
 export default connect(
   state => ({
     number: state.counter.number
   }),
   dispatch => {
     return { counterActions: bindActionCreators(counterActions, dispatch) };
+    // bindActionCreators는 Action 생성자 함수객체를 반환
   }
 )(CounterContainer);

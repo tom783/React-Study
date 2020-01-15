@@ -8,6 +8,7 @@ class HomeContainer extends Component {
     randomNumber: 0
   };
   handlePhoto = () => {
+    //액션 실행함수
     Actions.getPhoto();
     this.setState({
       randomNumber: ranNum()
@@ -15,6 +16,7 @@ class HomeContainer extends Component {
   };
 
   handlePlace = () => {
+    //액션 실행함수
     Actions.getPlace();
   };
 

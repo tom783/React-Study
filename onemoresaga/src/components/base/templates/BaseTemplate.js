@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-const BaseTemplate = ({ children, header, content }) => {
+const BaseTemplate = ({ children, header, content, footer }) => {
   return (
     <>
       {header && <header>{header}</header>}
@@ -8,6 +8,7 @@ const BaseTemplate = ({ children, header, content }) => {
         {children}
         {content && <div>{content}</div>}
       </main>
+      {footer && <footer>{footer}</footer>}
     </>
   );
 };

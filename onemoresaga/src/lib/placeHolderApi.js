@@ -7,5 +7,9 @@ export default function placeHolderApi(query) {
   };
 
   const reqUrl = `${placeApiInfo.Url}${placeApiInfo.ApiOption}`;
-  return axios.get(reqUrl);
+  return axios.get(reqUrl).catch(err => {
+    return {
+      error : true
+    }
+  });
 }

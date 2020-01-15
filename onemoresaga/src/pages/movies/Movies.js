@@ -1,11 +1,16 @@
 import React from "react";
 import BaseTemplate from "components/base/templates/BaseTemplate";
-import HeaderComponent from "components/base/header";
+import HeaderContainer from "containers/base/HeaderContainer";
+import FooterContainer from "containers/base/FooterContainer";
 import MoivesContainer from "containers/movies";
 
 const Movies = () => {
   return (
-    <BaseTemplate header={<HeaderComponent />} content={<MoivesContainer />}>
+    <BaseTemplate
+      header={<HeaderContainer />}
+      content={<MoivesContainer />}
+      footer={<FooterContainer />}
+    >
       <div>Moives</div>
     </BaseTemplate>
   );

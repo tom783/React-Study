@@ -1,18 +1,19 @@
 import { call, all, takeEvery } from "redux-saga/effects";
 import * as actions from "store/actions";
 import placeHolderApi from "lib/placeHolderApi";
-import store from "store";
+import { Actions } from "store/actionCreator";
 
 function* handlePlace({ payload }) {
   console.log("handling place saga");
-  console.log(typeof payload);
-  const { data } = yield call(placeHolderApi, payload);
+  Actions.getPlacePend(payload);
+  const { data, error } = yield call(placeHolderApi, payload);
   console.log(data);
 
-  if (data) {
-    store.dispatch({ type: actions.GET_PLACE_SUCCESS, payload: data });
+  if (data && !error) {
+    Actions.getPlaceSuc(data);
   } else {
     console.log("handlePlace fail");
+    Actions.getPlaceFail();
   }
 }
 

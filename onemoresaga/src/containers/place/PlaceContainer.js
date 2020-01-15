@@ -1,9 +1,11 @@
-import React, { Component } from "react";
+import React from 'react';
 
-class PlaceContainer extends Component {
-  render() {
-    return <div>PlaceContainer</div>;
-  }
-}
+const PlaceContainer = () => {
+  return (
+    <div>
+      
+    </div>
+  );
+};
 
 export default PlaceContainer;

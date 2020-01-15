@@ -1,9 +1,11 @@
-import React, { Component } from "react";
+import React from 'react';
 
-class NewsContainer extends Component {
-  render() {
-    return <div>NewsContainer</div>;
-  }
-}
+const NewsContainer = () => {
+  return (
+    <div>
+      
+    </div>
+  );
+};
 
 export default NewsContainer;

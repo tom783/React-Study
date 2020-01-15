@@ -1,19 +1,22 @@
 import { all, takeEvery, call } from "redux-saga/effects";
 import * as actions from "store/actions";
 import movieApi from "lib/movieApi";
-import store from "store";
+import { Actions } from "store/actionCreator";
 
 function* handleMoive({ payload }) {
   console.log("handling movie saga");
-  console.log(payload);
-  const { data } = yield call(movieApi, payload);
-  console.log(data);
+  Actions.getMoviePend(payload);
+  const { data,error } = yield call(movieApi, payload);
+  console.log(data,'!!');
 
-  if (data) {
-    store.dispatch({ type: actions.GET_MOVIE_SUCCESS, payload: data.results });
+  if (data && !error) {
+    // store.dispatch({ type: actions.GET_MOVIE_SUCCESS, payload: data.results });
+    Actions.getMovieSuc(data.results);
   } else {
     console.log("handleMovie fail");
+    Actions.getMovieFail();
   }
+
 }
 
 export default function* movieSaga() {
