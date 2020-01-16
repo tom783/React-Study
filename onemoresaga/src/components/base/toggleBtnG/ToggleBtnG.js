@@ -106,6 +106,7 @@ const Styled = {
         position: absolute;
         margin: 0 auto;
         width: ${props => props._style.width}px;
+        z-index: -1;
         opacity: 0;
         overflow: hidden;
         transition: all 0.7s ease-out;
@@ -137,6 +138,20 @@ const Styled = {
                     &.active {
                         opacity: 1;
                         ${props._style.direction === "right"? "left" : "right"}: 0;
+                    }
+                    `
+                )
+            }else if(props._style.direction === "moveUp"){
+                return (
+                    `height: ${props.useChildKey.length * (props._style.height + props._style.gap)}px;
+                    transform: translateY(-100%);
+                    & > li{
+                    margin-top: ${props._style.gap ? props._style.gap : 0}px;
+                    }
+                    &.active {
+                        opacity: 1;
+                        transform: translateY(-0%);
+                        z-index: 10;
                     }
                     `
                 )

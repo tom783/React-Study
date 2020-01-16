@@ -19,7 +19,7 @@ const btnConfig = {
               news: "yellow",
               place: "#dfdf"
           }, 
-          direction: "down",
+          direction: "moveUp",
           disabled: [],
       },
     labelCont: {
