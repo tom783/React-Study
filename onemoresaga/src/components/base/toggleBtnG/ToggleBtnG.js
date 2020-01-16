@@ -146,7 +146,7 @@ const Styled = {
                     `height: ${props.useChildKey.length * (props._style.height + props._style.gap)}px;
                     transform: translateY(-100%);
                     & > li{
-                    margin-top: ${props._style.gap ? props._style.gap : 0}px;
+                        margin-top: ${props._style.gap ? props._style.gap : 0}px;
                     }
                     &.active {
                         opacity: 1;
