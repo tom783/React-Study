@@ -8,7 +8,6 @@ const movieApiInfo = {
 };
 
 export default function movieApi(query) {
-  console.log(query);
   const reqURL = `${movieApiInfo.Url}${movieApiInfo.ApiOption}?api_key=${movieApiInfo.KeyValue}&language=${movieApiInfo.Language}&query=${query}`;
   return axios.get(reqURL).catch(err=>{
     return {

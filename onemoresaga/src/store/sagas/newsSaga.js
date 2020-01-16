@@ -7,7 +7,6 @@ function* handleNews({ payload }) {
   console.log("handling news saga");
   Actions.getNewsPend(payload);
   const { data, error } = yield call(newsApi, payload);
-  console.log(data);
 
   if (data && !error) {
     Actions.getNewsSuc(data.articles);

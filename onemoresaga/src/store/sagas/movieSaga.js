@@ -7,7 +7,6 @@ function* handleMoive({ payload }) {
   console.log("handling movie saga");
   Actions.getMoviePend(payload);
   const { data,error } = yield call(movieApi, payload);
-  console.log(data,'!!');
 
   if (data && !error) {
     // store.dispatch({ type: actions.GET_MOVIE_SUCCESS, payload: data.results });

@@ -26,3 +26,5 @@ const MoviesContainer = () => {
 };
 
 export default MoviesContainer;
+
+

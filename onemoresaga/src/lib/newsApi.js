@@ -6,7 +6,6 @@ const newsApiInfo = {
 };
 
 export default function newsApi(country) {
-  console.log(country);
   const reqUrl = `${newsApiInfo.Url}?apiKey=${newsApiInfo.KeyValue}&country=${country}`;
   console.log(reqUrl);
   return axios.get(reqUrl).catch(err =>{

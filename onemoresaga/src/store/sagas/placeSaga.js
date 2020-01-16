@@ -7,7 +7,6 @@ function* handlePlace({ payload }) {
   console.log("handling place saga");
   Actions.getPlacePend(payload);
   const { data, error } = yield call(placeHolderApi, payload);
-  console.log(data);
 
   if (data && !error) {
     Actions.getPlaceSuc(data);

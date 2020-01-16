@@ -5,6 +5,9 @@ import Movies from "pages/movies";
 import News from "pages/news";
 import Place from "pages/place";
 
+import test from 'pages/test';
+
+
 class App extends Component {
   render() {
     return (
@@ -13,6 +16,8 @@ class App extends Component {
         <Route path="/movies" component={Movies} />
         <Route path="/news" component={News} />
         <Route path="/place" component={Place} />
+        <Route path="/test" component={test} />
+        
       </Switch>
     );
   }
