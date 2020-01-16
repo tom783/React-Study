@@ -2,10 +2,10 @@ import React, { Component, useEffect } from "react";
 import { Actions } from "store/actionCreator";
 import { connect } from "react-redux";
 import ListTemplate from "components/base/templates/ListTemplate";
-import ToggleBtnG from "../../components/base/toggleBtnG/ToggleBtnG";
-
+import ToggleBtnG from "components/base/toggleBtnG/ToggleBtnG";
+import {Slider} from 'components/base/slider';
 // 
-const config = {
+const btnConfig = {
   useChildKey: ["home", "movie", "news", "place"],
   _style: {
           width: 50,
@@ -19,11 +19,11 @@ const config = {
               news: "yellow",
               place: "#dfdf"
           }, 
-          direction: "left",
-          disabled: ['movie', 'home'],
+          direction: "down",
+          disabled: [],
       },
     labelCont: {
-      cont: "img:https://i.pinimg.com/236x/ae/c9/ea/aec9eadd89aa51a9b753b221f3bcce12.jpg",
+      cont: "text:Label",
       effect: 'ro'
     },
     content: {
@@ -39,6 +39,34 @@ const config = {
         place: "/place",
     },
 }
+//
+const sliderConfig = {
+        _style: {
+            wrapPadding: 15,
+            sliderWidth: 300,
+            sliderHeight: 150,
+            sliderItemGap: 10,
+            carouselPadding: 25,
+            carouselWidth: 16,
+            carouselHeight: 16,
+            carouselItemGap: 10,
+            carouselItemShape: "circle",
+            arrowWidth: 70,
+            arrowHeight: 100,
+        },
+        content: {
+            slider: ["img:https://i.pinimg.com/236x/ae/c9/ea/aec9eadd89aa51a9b753b221f3bcce12.jpg", "text:2", "text:3"],
+            carousel: "text:number",
+            arrowPrev: "text:prev",
+            arrowNext: "text:next",
+        },
+        effect: {
+            duration: 0.7,
+            acceleration: "ease",
+        },
+        useComponent: false,
+   }
+
 // 
 
 const HomeContainer = (props) => {
@@ -52,8 +80,12 @@ const HomeContainer = (props) => {
   return (
       <>
         <div>HomeContainer</div>
-        <span>test</span>
-        <ToggleBtnG {...config} />
+        <ToggleBtnG {...btnConfig} />
+        <div>
+          <div>
+            {/* <Slider {...sliderConfig} /> */}
+          </div>
+        </div>
       </>
   );
 };

@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 
 /**
  * 
- * @param {*} config 
- * config => {
+ * @param {*} btnConfig 
+ * btnConfig => {
  *  useChildKey: ["key1", "key2"], string type // 나열할 순서대로
  *  _style: {
  *      width: int,
@@ -18,16 +18,16 @@ import { Link } from "react-router-dom";
             key1: #ffff string,
             key2: #0000 string
         }, 
-        direction: "right" || "left" || "up" || "down",
-        disabled: ["key1"], string type
+        direction: "right" || "left" || "up" || "down" || "moveUp" || "moveDown",
+        disabled: [], array type
  *  },
     labelCont: {
         cont: "img: path string" || "text:string",
         effect: "ro" ,
     },
     content: {
-        key1: "img: path string" || "text:string",
-        key2: "img: path string" || "text:string"
+        key1: "img:path string" || "text:string",
+        key2: "img:path string" || "text:string"
     }, // img와 text로 prefix
     childUrl: {
         key1: url string,
@@ -36,27 +36,26 @@ import { Link } from "react-router-dom";
 
  * }
  */
-function ToggleBtnG(config) {
+function ToggleBtnG(btnConfig) {
     const [click, setClass] = useState(false);
-    const [disabled, setDisabled] = useState(false);
-    const {useChildKey, _style, labelCont, content, childUrl} = config;
+    const {useChildKey, _style, labelCont, content, childUrl} = btnConfig;
     return (
-        <Styled.Wrap {...config}>
-            <Styled.Label {...config} onClick={()=>setClass(!click)}>
+        <Styled.Wrap {...btnConfig}>
+            <Styled.Label {...btnConfig} onClick={()=>setClass(!click)} className={click? 'active' : ''}>
                 {labelCont.cont.startsWith('img:') ? 
                 <img src={labelCont.cont.replace(/img:/g, '')} /> : 
                 <span>{labelCont.cont.replace(/text:/g, '')}</span>}
             </Styled.Label>
-            <Styled.ListChild {...config} className={click? 'active' : ''}>
+            <Styled.ListChild {...btnConfig} className={click? 'active' : ''}>
                 {useChildKey.map((item, index) => {
                     return (
-                        <Styled.ListItem {...config} item={item} key={useChildKey[index]} 
+                        <Styled.ListItem {...btnConfig} item={item} key={useChildKey[index]} 
                         className={_style.disabled.find(i => i===item) ? 'disabled' : ''} >
-                        <Link to={childUrl[item]}>
+                        <a href={childUrl[item]}>
                             {content[item].startsWith('img:') ? 
                             <img src={content[item].replace(/img:/g, '')} /> : 
                             <span>{content[item].replace(/text:/g, '')}</span>}
-                        </Link>
+                        </a>
                         </Styled.ListItem>
                     )
                     })}
@@ -94,7 +93,7 @@ const Styled = {
         ${props => {
             if(props.labelCont.effect === 'ro'){
                 return (
-                    `&:hover {
+                    `&.active {
                         transform: rotate(45deg);
                     }
                     `
