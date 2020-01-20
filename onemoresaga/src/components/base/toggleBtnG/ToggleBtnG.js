@@ -18,7 +18,8 @@ import { Link } from "react-router-dom";
             key1: #ffff string,
             key2: #0000 string
         }, 
-        direction: "right" || "left" || "up" || "down" || "moveUp" || "moveDown",
+        direction: "right" || "left" || "up" || "down" || "moveUp" || "moveDown || "moveRight" || "moveLeft",
+        duration: int,
         disabled: [], array type
  *  },
     labelCont: {
@@ -46,7 +47,7 @@ function ToggleBtnG(btnConfig) {
                 <img src={labelCont.cont.replace(/img:/g, '')} /> : 
                 <span>{labelCont.cont.replace(/text:/g, '')}</span>}
             </Styled.Label>
-            <Styled.ListChild {...btnConfig} className={click? 'active' : ''}>
+            <Styled.ListChild {...btnConfig} className={click? 'active' : ''} setCss = {setCss(btnConfig)}>
                 {useChildKey.map((item, index) => {
                     return (
                         <Styled.ListItem {...btnConfig} item={item} key={useChildKey[index]} 
@@ -64,6 +65,32 @@ function ToggleBtnG(btnConfig) {
     );
 }
 
+const setCss = props => {
+    console.log(props);
+        let css='';
+        for(let i = 1; i < props.useChildKey.length+1; i ++){
+            if(props._style.direction === "moveRight" || props._style.direction === "moveLeft"){
+                css += `
+                & > li:nth-child(${i}){
+                    transform: ${props._style.direction === "moveRight"?
+                    `translateX(${props._style.width * i + props._style.gap * i}px); margin-left: ${props._style.gap}px` : 
+                    `translateX(-${props._style.width * i + props._style.gap * i}px); margin-right: ${props._style.gap}px`}
+                }
+            `
+            }else {
+                css += `
+                & > li:nth-child(${i}){
+                    transform: ${props._style.direction === "moveDown"?
+                    `translateY(${props._style.height * i + props._style.gap * i}px); margin-top: ${props._style.gap}px` : 
+                    `translateY(-${props._style.height * i + props._style.gap * i}px); margin-bottom: ${props._style.gap}px`}
+                }
+            `
+            }
+        }
+        
+        return css;
+}
+
 
 const Styled = {
     Wrap: styled.div`
@@ -73,13 +100,15 @@ const Styled = {
     `,
     Label: styled.div`
         display: block;
+        position: relative;
+        z-index: 11;
         width: ${props => props._style.width}px;
         height: ${props => props._style.height}px;
         line-height: ${props => props._style.height}px;
         margin: 0 auto;
         text-align: center;
         background-color: ${props => props._style.bgColor.label};
-        transition: transform 0.7s ease;
+        transition: transform ${props => props._style.duration}s ease;
         ${props => props._style.shape === "circle" ? 
             `border-radius: 50%; overflow: hidden;` : `border-radius: 0%`
         }
@@ -105,12 +134,12 @@ const Styled = {
     ListChild: styled.ul`
         position: absolute;
         margin: 0 auto;
-        width: ${props => props._style.width}px;
+        width: ${props => (props._style.direction === "moveRight" || props._style.direction === "moveLeft")?
+         "auto": `${props._style.width}px;`}
         z-index: -1;
         opacity: 0;
         overflow: hidden;
-        transition: all 0.7s ease-out;
-        
+        transition: all ${props => props._style.duration}s ease-out;
         ${props => {
             if(props._style.direction === "down" || props._style.direction === "up"){
                 return (
@@ -141,17 +170,21 @@ const Styled = {
                     }
                     `
                 )
-            }else if(props._style.direction === "moveUp"){
+            }else if(props._style.direction === "moveDown" || props._style.direction === "moveUp" || props._style.direction === "moveLeft" || props._style.direction === "moveRight"){
                 return (
-                    `height: ${props.useChildKey.length * (props._style.height + props._style.gap)}px;
-                    transform: translateY(-100%);
+                    `height: ${props._style.height}px;
+                    top: 0;
+                    left: 0px;
+                    opacity: 1;
+                    overflow: visible;
                     & > li{
-                        margin-top: ${props._style.gap ? props._style.gap : 0}px;
+                        position: absolute;
+                        left: 0;
+                        transition: all ${props._style.duration}s ease-out;
                     }
                     &.active {
-                        opacity: 1;
-                        transform: translateY(-0%);
-                        z-index: 10;
+                        ${props.setCss}
+                        z-index: 0;
                     }
                     `
                 )
