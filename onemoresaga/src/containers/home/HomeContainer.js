@@ -2,8 +2,12 @@ import React, { Component, useEffect } from "react";
 import { Actions } from "store/actionCreator";
 import { connect } from "react-redux";
 import ListTemplate from "components/base/templates/ListTemplate";
+//
 import ToggleBtnG from "components/base/toggleBtnG/ToggleBtnG";
 import {Slider} from 'components/base/slider';
+import UserInfoTemplate from 'components/base/templates/UserInfoTemplate';
+import {TxtInput} from 'components/base/txtInput';
+import {makeOjb} from 'lib/util';
 // 
 const btnConfig = {
   useChildKey: ["home", "movie", "news", "place"],
@@ -68,8 +72,9 @@ const sliderConfig = {
         useComponent: false,
    }
 
-// 
 
+
+const compoConfig = makeOjb("txtInput");
 const HomeContainer = (props) => {
   useEffect(() =>{
     
@@ -81,12 +86,11 @@ const HomeContainer = (props) => {
   return (
       <>
         <div>HomeContainer</div>
-        <ToggleBtnG {...btnConfig} />
-        <div>
-          <div>
-            {/* <Slider {...sliderConfig} /> */}
-          </div>
-        </div>
+        {/* <ToggleBtnG {...btnConfig} /> */}
+        {/* <Slider {...sliderConfig} /> */}
+        <UserInfoTemplate config={compoConfig} _Input={TxtInput}>
+          Title
+        </UserInfoTemplate>
       </>
   );
 };
