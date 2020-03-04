@@ -44,15 +44,19 @@ function PagingContainer(props) {
   }
 
   // NOTE: url change
-  useEffect(async () => {
+  useEffect(() => {
     const page = props.match.params.list;
-    const {data,error} = await Acx({url:`${apiAddress}/?${limit(5,page)}`});
-    if(data && !error){
-      setValues(draft=>{
-        draft.pagingData.page = page;
-        draft.list = data.articles
-      });
+    
+    const api = async () => {
+      const {data,error} = await Acx({url:`${apiAddress}/?${limit(5,page)}`});
+      if(data && !error){
+        setValues(draft=>{
+          draft.pagingData.page = page;
+          draft.list = data.articles;
+        });
+      }
     }
+    api();
   }, [props.match.params.list]);
 
   // NOTE: 초기
@@ -62,7 +66,7 @@ function PagingContainer(props) {
     if(data && !error){
       setValues(draft=>{
         draft.pagingData.page = page;
-        draft.list = data.articles
+        draft.list = data.articles;
       });
     }
   }, []);
