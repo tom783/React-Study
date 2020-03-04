@@ -33,22 +33,22 @@ const list =[
 class App extends Component {
   render() {
     return (
-      <>
+      // <>
       
-      <Slide 
-        config={config}
-        list={list}
-      />
-      </>
-      // <Switch>
+      // <Slide 
+      //   config={config}
+      //   list={list}
+      // />
+      // </>
+      <Switch>
         
-      //   <Route exact path="/" component={Home} />
-      //   <Route path="/movies" component={Movies} />
-      //   <Route path="/news" component={News} />
-      //   <Route path="/place" component={Place} />
-      //   <Route path="/test" component={test} />
+        <Route exact path="/" component={Home} />
+        <Route path="/movies" component={Movies} />
+        <Route path="/news" component={News} />
+        <Route path="/place" component={Place} />
+        <Route path="/test" component={test} />
         
-      // </Switch>
+      </Switch>
     );
   }
 }

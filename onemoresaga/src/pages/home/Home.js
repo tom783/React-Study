@@ -12,14 +12,14 @@ const Home = () => {
 
   return (
     <BaseTemplate
-      // header={<HeaderContainer />}
-      // content={<HomeContainer />}
-      // footer={<FooterContainer />}
+      header={<HeaderContainer />}
+      content={<HomeContainer />}
+      footer={<FooterContainer />}
     >
       <div>Home</div>
-      <InputSignup label="업체명" name="store" onChange={onChange} />
+      {/* <InputSignup label="업체명" name="store" onChange={onChange} />
       <InputSignup label="이름" name="nickName" onChange={onChange} />
-      <InputSignup label="지역" name="area" onChange={onChange} />
+      <InputSignup label="지역" name="area" onChange={onChange} /> */}
     </BaseTemplate>
   );
 };

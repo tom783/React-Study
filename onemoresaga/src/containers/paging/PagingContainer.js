@@ -39,12 +39,12 @@ function PagingContainer(props) {
         draft.pagingData.page = page;
         draft.list = data.articles
       });
-      props.history.push(`/pageTest/${config}`);
+      props.history.push(`/news/${config}`);
     }
   }
 
   // NOTE: url change
-  useDidUpdateEffect(async () => {
+  useEffect(async () => {
     const page = props.match.params.list;
     const {data,error} = await Acx({url:`${apiAddress}/?${limit(5,page)}`});
     if(data && !error){
@@ -81,7 +81,7 @@ function PagingContainer(props) {
         total={pagingData.total}
         onChange={handlePageChange}
         countPerPage={1}
-        getPageUrl={(i) => `/pageTest/${i}`}
+        getPageUrl={(i) => `/news/${i}`}
       />
     </Styled.PageNationComponent>
   );
